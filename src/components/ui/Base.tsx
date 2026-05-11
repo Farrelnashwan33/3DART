@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -15,9 +15,10 @@ export function Button({
   variant = "primary",
   icon: Icon,
   ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+}: Omit<HTMLMotionProps<"button">, "children"> & {
   variant?: "primary" | "secondary" | "glass" | "ghost";
   icon?: LucideIcon;
+  children?: React.ReactNode;
 }) {
   const variants = {
     primary: "bg-accent-indigo hover:bg-accent-indigo/80 text-white neon-shadow-purple",

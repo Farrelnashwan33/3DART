@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Box, Sparkles, LayoutDashboard, Compass, CreditCard, Menu } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./Base";
+import { Button } from "../ui/Base";
 
 export default function Navbar() {
   return (

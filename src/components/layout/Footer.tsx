@@ -1,14 +1,14 @@
 "use client";
 
-import { Box, Twitter, Github, Instagram, Youtube, Linkedin, Mail } from "lucide-react";
+import { Box, Send, Code, Camera, Video, Briefcase, Mail } from "lucide-react";
 import Link from "next/link";
 
 const socialIcons = [
-  { icon: Twitter, href: "#" },
-  { icon: Instagram, href: "#" },
-  { icon: Youtube, href: "#" },
-  { icon: Github, href: "#" },
-  { icon: Linkedin, href: "#" },
+  { icon: Send, href: "#" },
+  { icon: Camera, href: "#" },
+  { icon: Video, href: "#" },
+  { icon: Code, href: "#" },
+  { icon: Briefcase, href: "#" },
 ];
 
 export default function Footer() {
