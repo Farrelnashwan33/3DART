@@ -13,10 +13,10 @@ export default function Home() {
       <section id="features" className="py-24 px-6 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
               Next-Gen <span className="text-gradient">Capabilities</span>
             </h2>
-            <p className="text-white/60 text-lg">Powered by advanced neural architectures for 3D generation.</p>
+            <p className="text-slate-600 text-lg">Powered by advanced neural architectures for 3D generation.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -68,12 +68,12 @@ export default function Home() {
 
 function FeatureCard({ icon: Icon, title, description, color }: { icon: any, title: string, description: string, color: string }) {
   return (
-    <Card className="hover:scale-105 transition-transform duration-300 border-white/5">
-      <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 ${color}`}>
+    <Card className="hover:scale-105 transition-transform duration-300 border-slate-200 shadow-lg shadow-slate-200/20">
+      <div className={`w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 ${color}`}>
         <Icon size={24} />
       </div>
-      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-      <p className="text-white/40 leading-relaxed">{description}</p>
+      <h3 className="text-xl font-bold text-slate-900 mb-3">{title}</h3>
+      <p className="text-slate-500 leading-relaxed">{description}</p>
     </Card>
   );
 }

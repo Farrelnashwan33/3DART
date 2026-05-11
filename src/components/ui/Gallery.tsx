@@ -22,15 +22,15 @@ export default function Gallery() {
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold text-white mb-4"
+              className="text-4xl md:text-5xl font-bold text-slate-900 mb-4"
             >
               Community <span className="text-gradient">Showcase</span>
             </motion.h2>
-            <p className="text-white/60 text-lg">Explore the most stunning 3D creations from our global community.</p>
+            <p className="text-slate-600 text-lg">Explore the most stunning 3D creations from our global community.</p>
           </div>
           <div className="flex gap-4">
-            <button className="px-6 py-2 rounded-full border border-white/10 text-white/70 hover:text-white hover:bg-white/5 transition-all">Trending</button>
-            <button className="px-6 py-2 rounded-full border border-white/10 text-white/70 hover:text-white hover:bg-white/5 transition-all">Recent</button>
+            <button className="px-6 py-2 rounded-full border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">Trending</button>
+            <button className="px-6 py-2 rounded-full border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">Recent</button>
           </div>
         </div>
 
@@ -42,14 +42,14 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="group p-0 border-white/5 hover:border-accent-cyan/30 bg-white/[0.02]">
-                <div className="aspect-square bg-gradient-to-br from-white/5 to-white/[0.02] relative overflow-hidden flex items-center justify-center">
+              <Card className="group p-0 border-slate-200 hover:border-accent-cyan/30 bg-white shadow-lg shadow-slate-200/20">
+                <div className="aspect-square bg-slate-50 relative overflow-hidden flex items-center justify-center">
                   {/* Placeholder for 3D Thumbnail - in a real app this would be an image or a mini R3F scene */}
                   <div className="w-32 h-32 rounded-full bg-gradient-to-br from-accent-cyan/20 to-accent-purple/20 blur-2xl group-hover:scale-150 transition-transform duration-700" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
-                       <SparklesIcon className="w-12 h-12 text-white/20 mb-2 mx-auto" />
-                       <span className="text-white/20 font-mono text-xs uppercase tracking-widest">{art.style}</span>
+                       <SparklesIcon className="w-12 h-12 text-slate-200 mb-2 mx-auto" />
+                       <span className="text-slate-300 font-mono text-xs uppercase tracking-widest">{art.style}</span>
                     </div>
                   </div>
                   
@@ -62,10 +62,10 @@ export default function Gallery() {
                 </div>
                 <div className="p-5">
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-bold text-white group-hover:text-accent-cyan transition-colors">{art.title}</h3>
-                    <span className="text-xs bg-accent-indigo/20 text-accent-indigo px-2 py-1 rounded-md">{art.style}</span>
+                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-accent-cyan transition-colors">{art.title}</h3>
+                    <span className="text-xs bg-accent-indigo/10 text-accent-indigo px-2 py-1 rounded-md">{art.style}</span>
                   </div>
-                  <div className="flex justify-between items-center text-white/50 text-sm">
+                  <div className="flex justify-between items-center text-slate-400 text-sm">
                     <span>{art.author}</span>
                     <div className="flex items-center gap-1">
                       <Heart size={14} className="text-accent-purple" />

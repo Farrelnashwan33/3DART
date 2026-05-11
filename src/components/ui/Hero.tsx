@@ -49,7 +49,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-6xl md:text-8xl font-black text-white leading-tight"
+            className="text-6xl md:text-8xl font-black text-slate-950 leading-tight"
           >
             Create <span className="text-gradient">Stunning</span> 3D Art with AI
           </motion.h1>
@@ -58,7 +58,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-white/60 max-w-xl"
+            className="text-xl text-slate-600 max-w-xl"
           >
             The world's first AI-powered 3D art generator. Create stylized characters, 
             environments, and objects in seconds.
@@ -70,13 +70,13 @@ export default function Hero() {
             transition={{ delay: 0.3 }}
             className="space-y-4"
           >
-            <div className="glass p-2 rounded-[2rem] flex flex-col md:flex-row items-center gap-2 max-w-2xl border-white/10 shadow-2xl">
+            <div className="glass p-2 rounded-[2rem] flex flex-col md:flex-row items-center gap-2 max-w-2xl border-slate-200 shadow-2xl shadow-slate-200/50">
               <input
                 type="text"
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Describe your 3D masterpiece..."
-                className="w-full bg-transparent border-none outline-none px-6 py-3 text-white text-lg placeholder:text-white/30"
+                className="w-full bg-transparent border-none outline-none px-6 py-3 text-slate-900 text-lg placeholder:text-slate-400"
               />
               <Button 
                 onClick={handleGenerate}
@@ -90,7 +90,7 @@ export default function Hero() {
             </div>
             
             <div className="flex flex-wrap gap-2 pt-2">
-              <span className="text-white/40 text-sm py-1.5 px-3">Quick Styles:</span>
+              <span className="text-slate-400 text-sm py-1.5 px-3">Quick Styles:</span>
               {styles.slice(0, 4).map((style) => (
                 <button
                   key={style}
@@ -98,13 +98,13 @@ export default function Hero() {
                   className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
                     selectedStyle === style 
                       ? "bg-accent-cyan text-black" 
-                      : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900"
                   }`}
                 >
                   {style}
                 </button>
               ))}
-              <button className="px-4 py-1.5 rounded-full bg-white/5 text-white/60 hover:text-white text-sm">More Styles...</button>
+              <button className="px-4 py-1.5 rounded-full bg-slate-100 text-slate-600 hover:text-slate-900 text-sm">More Styles...</button>
             </div>
           </motion.div>
 
@@ -115,16 +115,16 @@ export default function Hero() {
             className="flex items-center gap-12 pt-8"
           >
             <div className="text-center">
-              <div className="text-3xl font-bold text-white">10M+</div>
-              <div className="text-white/40 text-sm">Arts Created</div>
+              <div className="text-3xl font-bold text-slate-900">10M+</div>
+              <div className="text-slate-400 text-sm">Arts Created</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-white">50k+</div>
-              <div className="text-white/40 text-sm">Active Artists</div>
+              <div className="text-3xl font-bold text-slate-900">50k+</div>
+              <div className="text-slate-400 text-sm">Active Artists</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-white">99%</div>
-              <div className="text-white/40 text-sm">Satisfaction</div>
+              <div className="text-3xl font-bold text-slate-900">99%</div>
+              <div className="text-slate-400 text-sm">Satisfaction</div>
             </div>
           </motion.div>
         </div>
@@ -137,24 +137,24 @@ export default function Hero() {
         >
           {/* This area is controlled by the Scene background, but we can add UI overlays here */}
           <div className="absolute top-0 right-0 p-6 flex flex-col gap-4">
-             <Card className="w-48 py-4 px-6 border-white/10 bg-white/5">
+             <Card className="w-48 py-4 px-6 border-slate-200 bg-white/80 shadow-lg shadow-slate-200/20">
                 <div className="flex items-center gap-3 mb-2">
                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                   <span className="text-xs font-bold text-white uppercase tracking-wider">Live Preview</span>
+                   <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">Live Preview</span>
                 </div>
-                <div className="text-xs text-white/50">Rendering in 4K Path-Tracing Mode...</div>
+                <div className="text-xs text-slate-500">Rendering in 4K Path-Tracing Mode...</div>
              </Card>
              
-             <Card className="w-48 py-4 px-6 border-white/10 bg-white/5">
+             <Card className="w-48 py-4 px-6 border-slate-200 bg-white/80 shadow-lg shadow-slate-200/20">
                 <div className="flex items-center gap-3 mb-2 text-accent-cyan">
                    <Layers size={16} />
                    <span className="text-xs font-bold uppercase tracking-wider">Parameters</span>
                 </div>
                 <div className="space-y-2">
-                  <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
                     <div className="h-full w-3/4 bg-accent-cyan" />
                   </div>
-                  <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
                     <div className="h-full w-1/2 bg-accent-purple" />
                   </div>
                 </div>
@@ -162,13 +162,13 @@ export default function Hero() {
           </div>
           
           <div className="absolute bottom-0 right-0 p-6">
-             <div className="flex items-center gap-3 glass p-3 rounded-2xl border-white/10">
+             <div className="flex items-center gap-3 glass p-3 rounded-2xl border-slate-200 shadow-lg shadow-slate-200/20">
                 <div className="w-10 h-10 rounded-full bg-accent-indigo flex items-center justify-center">
-                  <History size={20} className="text-white" />
+                  <History size={20} className="text-slate-900" />
                 </div>
                 <div className="text-sm">
-                  <div className="text-white font-bold">Recent History</div>
-                  <div className="text-white/40">5 models saved today</div>
+                   <div className="text-slate-900 font-bold">Recent History</div>
+                   <div className="text-slate-400">5 models saved today</div>
                 </div>
              </div>
           </div>
