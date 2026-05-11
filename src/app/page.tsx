@@ -1,65 +1,79 @@
-import Image from "next/image";
+import Hero from "@/components/ui/Hero";
+import Gallery from "@/components/ui/Gallery";
+import Pricing from "@/components/ui/Pricing";
+import { Sparkles, Zap, Shield, Cpu, Cloud, Smartphone } from "lucide-react";
+import { Card } from "@/components/ui/Base";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <main className="min-h-screen">
+      <Hero />
+      
+      {/* Features Section */}
+      <section id="features" className="py-24 px-6 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Next-Gen <span className="text-gradient">Capabilities</span>
+            </h2>
+            <p className="text-white/60 text-lg">Powered by advanced neural architectures for 3D generation.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <FeatureCard 
+              icon={Cpu} 
+              title="Real-time Rendering" 
+              description="High-fidelity 3D renders generated in seconds with path-tracing technology."
+              color="text-accent-cyan"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <FeatureCard 
+              icon={Sparkles} 
+              title="Style Morphing" 
+              description="Seamlessly transition between Anime, Cyberpunk, and Realistic styles."
+              color="text-accent-purple"
+            />
+            <FeatureCard 
+              icon={Zap} 
+              title="AI Prompt Tuning" 
+              description="Our LLM automatically enhances your prompts for the best 3D results."
+              color="text-accent-indigo"
+            />
+            <FeatureCard 
+              icon={Cloud} 
+              title="Cloud Export" 
+              description="Export models to GLTF, OBJ, and FBX for any game engine or 3D software."
+              color="text-accent-cyan"
+            />
+            <FeatureCard 
+              icon={Shield} 
+              title="Ownership" 
+              description="Full commercial rights to every single 3D model you generate."
+              color="text-accent-purple"
+            />
+            <FeatureCard 
+              icon={Smartphone} 
+              title="AR Ready" 
+              description="Instantly view your creations in augmented reality on any mobile device."
+              color="text-accent-indigo"
+            />
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <Gallery />
+      <Pricing />
+    </main>
+  );
+}
+
+function FeatureCard({ icon: Icon, title, description, color }: { icon: any, title: string, description: string, color: string }) {
+  return (
+    <Card className="hover:scale-105 transition-transform duration-300 border-white/5">
+      <div className={`w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6 ${color}`}>
+        <Icon size={24} />
+      </div>
+      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
+      <p className="text-white/40 leading-relaxed">{description}</p>
+    </Card>
   );
 }
