@@ -11,15 +11,17 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Vision3D AI | Turn Imagination Into 3D Reality",
-  description: "Create stunning 3D art from text prompts with our advanced AI generator. Explore community creations and export your own 3D masterpieces.",
-  keywords: ["AI Art", "3D Generator", "Vision3D", "Futuristic Design", "Digital Art"],
+  title: "Toko3DArt Costum | Custom 3D Printing Service",
+  description: "Jasa custom 3D print berkualitas tinggi dengan detail presisi untuk koleksi dan hadiah spesial.",
+  keywords: ["3D Printing", "Custom 3D Art", "Toko3DArt", "Digital Fabrication"],
   openGraph: {
-    title: "Vision3D AI | Turn Imagination Into 3D Reality",
-    description: "The world's first AI-powered 3D art generator.",
+    title: "Toko3DArt Costum | Custom 3D Printing Service",
+    description: "Jasa custom 3D print berkualitas tinggi dengan detail presisi.",
     images: ["/og-image.png"],
   },
 };
+
+import { CartProvider } from "@/context/CartContext";
 
 export default function RootLayout({
   children,
@@ -28,11 +30,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${outfit.variable} scroll-smooth`}>
-      <body className="font-sans antialiased bg-[#0F172A] text-white">
-        <Navbar />
-        {children}
-        <AIAssistant />
-        <Footer />
+      <body className="font-sans antialiased bg-slate-50 text-slate-900">
+        <CartProvider>
+          <Navbar />
+          {children}
+          <AIAssistant />
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

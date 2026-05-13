@@ -46,12 +46,12 @@ export default function Dashboard() {
               {[1, 2, 3].map((i) => (
                 <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:border-accent-cyan/30 transition-all group">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-accent-cyan/20 to-accent-purple/20 flex items-center justify-center">
-                      <LayoutDashboard size={24} className="text-white/20" />
+                    <div className="w-16 h-16 rounded-lg bg-slate-800 overflow-hidden flex items-center justify-center">
+                      <img src="/foto/benzema-1.png" alt="Benzema" className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <div className="text-white font-bold">Cyberpunk Tower #{i}</div>
-                      <div className="text-white/40 text-sm">Generated 2 days ago • Style: Cyberpunk</div>
+                      <div className="text-white font-bold">Benzema Bobblehead #{i}</div>
+                      <div className="text-white/40 text-sm">Generated {i} day{i > 1 ? "s" : ""} ago • Style: 3D Figure</div>
                     </div>
                   </div>
                   <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">

@@ -2,11 +2,11 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #020617;
+  --foreground: #0f172a;
   --accent-cyan: #0ea5e9;
   --accent-indigo: #6366f1;
   --accent-purple: #a855f7;
-  --glass: rgba(255, 255, 255, 0.8);
+  --glass: rgba(255, 255, 255, 0.7);
   --glass-border: rgba(0, 0, 0, 0.05);
 }
 
