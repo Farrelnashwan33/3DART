@@ -17,12 +17,18 @@ interface CartContextType {
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const [activeTab, setActiveTab] = useState<string>("overview");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -65,7 +71,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ items, addToCart, removeFromCart, clearCart, totalItems, totalPrice }}>
+    <CartContext.Provider value={{ items, addToCart, removeFromCart, clearCart, totalItems, totalPrice, activeTab, setActiveTab, searchQuery, setSearchQuery }}>
       {children}
     </CartContext.Provider>
   );

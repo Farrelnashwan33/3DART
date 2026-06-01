@@ -46,7 +46,7 @@ const socialIcons = [
 
 export default function Footer() {
   return (
-    <footer className="relative mt-32 pt-32 pb-16 overflow-hidden">
+    <footer className="relative mt-32 pt-32 pb-16 overflow-hidden isolate">
       {/* Background with Slanted Top */}
       <div className="absolute inset-0 bg-[#020617] -z-20" />
       <div 
@@ -78,7 +78,7 @@ export default function Footer() {
             TOKO3DART
           </motion.h2>
 
-          <div className="relative z-10 flex flex-col lg:flex-row justify-between items-end gap-12">
+          <div className="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-12">
             <div className="max-w-2xl space-y-6">
               <Link href="/" className="flex items-center gap-4 group">
                 <div className="w-14 h-14 bg-gradient-to-br from-accent-cyan via-accent-indigo to-accent-purple rounded-2xl flex items-center justify-center neon-shadow-purple rotate-3 group-hover:rotate-12 transition-transform duration-500">

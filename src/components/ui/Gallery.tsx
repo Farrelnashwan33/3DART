@@ -5,7 +5,7 @@ import { Heart, ShoppingCart, Eye, Check } from "lucide-react";
 import { Card } from "./Base";
 import { useCart } from "@/context/CartContext";
 
-const artworks = [
+export const artworks = [
   { id: 1, title: "Cyberpunk Samurai", style: "3D Figure", author: "@farrel_n", likes: "1.5k", price: 150, image: "/foto/art1.png" },
   { id: 2, title: "Neon Drifter", style: "Action Figure", author: "@farrel_n", likes: "856", price: 85, image: "/foto/art2.png" },
   { id: 3, title: "Mecha Guardian", style: "3D Figure", author: "@farrel_n", likes: "2.4k", price: 210, image: "/foto/art3.png" },
@@ -17,12 +17,17 @@ const artworks = [
 
 
 export default function Gallery() {
-  const { addToCart } = useCart();
+  const { addToCart, searchQuery } = useCart();
+
+  const filteredArtworks = artworks.filter((art) => 
+    art.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    art.style.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <section id="gallery" className="py-32 px-6 bg-white relative overflow-hidden">
+    <section id="gallery" className="py-16 px-4 md:py-32 md:px-6 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
           <div>
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -37,77 +42,85 @@ export default function Gallery() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tighter"
+              className="text-3xl md:text-5xl font-black text-slate-900 mb-4 md:mb-6 tracking-tighter"
             >
               Koleksi <span className="text-gradient">Produk</span> Kami
             </motion.h2>
-            <p className="text-slate-500 text-lg max-w-2xl font-light">Eksplorasi hasil cetak 3D custom dari berbagai karakter populer dengan kualitas premium.</p>
+            <p className="text-slate-500 text-base sm:text-lg max-w-2xl font-light">Eksplorasi hasil cetak 3D custom dari berbagai karakter populer dengan kualitas premium.</p>
           </div>
-          <div className="flex gap-4">
-            <button className="px-8 py-3 rounded-xl border border-slate-100 text-slate-500 font-bold text-xs uppercase tracking-widest hover:text-slate-900 hover:bg-slate-50 transition-all shadow-sm">Trending</button>
-            <button className="px-8 py-3 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10">All Products</button>
+          <div className="flex flex-wrap gap-2.5 sm:gap-4 w-full md:w-auto">
+            <button className="flex-1 sm:flex-none px-4 sm:px-8 py-3 rounded-xl border border-slate-100 text-slate-500 font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:text-slate-900 hover:bg-slate-50 transition-all shadow-sm cursor-pointer">Trending</button>
+            <button className="flex-1 sm:flex-none px-4 sm:px-8 py-3 rounded-xl bg-slate-900 text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10 cursor-pointer">All Products</button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {artworks.map((art, index) => (
-            <motion.div
-              key={art.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Card className="group p-0 border-slate-100 hover:border-accent-indigo/20 bg-white shadow-xl shadow-slate-200/20 hover:shadow-2xl hover:shadow-slate-200/40 transition-all duration-500 overflow-hidden">
-                <div className="aspect-[3/4] bg-slate-50 relative overflow-hidden flex items-center justify-center p-4">
-                  <img 
-                    src={art.image} 
-                    alt={art.title} 
-                    className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-1000"
-                  />
-                  
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-900 shadow-sm">
-                    {art.style}
-                  </div>
-
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
-                    <ActionButton icon={Eye} />
-                    <ActionButton icon={Heart} />
-                    <ActionButton 
-                      icon={ShoppingCart} 
-                      onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")} 
+        {filteredArtworks.length === 0 ? (
+          <div className="py-20 text-center space-y-4">
+            <div className="text-4xl">🔍</div>
+            <h3 className="text-xl font-bold text-slate-800">Tidak ada produk ditemukan</h3>
+            <p className="text-slate-500 text-sm max-w-sm mx-auto">Kami tidak dapat menemukan produk cetak 3D dengan nama "{searchQuery}". Coba gunakan kata kunci lain.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {filteredArtworks.map((art, index) => (
+              <motion.div
+                key={art.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="group p-0 border-slate-100 hover:border-accent-indigo/20 bg-white shadow-xl shadow-slate-200/20 hover:shadow-2xl hover:shadow-slate-200/40 transition-all duration-500 overflow-hidden">
+                  <div className="aspect-[3/4] bg-slate-50 relative overflow-hidden flex items-center justify-center p-4">
+                    <img 
+                      src={art.image} 
+                      alt={art.title} 
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-1000"
                     />
-                  </div>
-                </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-black text-slate-900 group-hover:text-accent-indigo transition-colors tracking-tight mb-4">{art.title}</h3>
-                  <button 
-                    onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")}
-                    className="w-full mb-6 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-orange-500/10 hover:shadow-orange-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                  >
-                    <ShoppingCart size={14} />
-                    Order di Shopee
-                  </button>
-                  
-                  <div className="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-widest pt-6 border-t border-slate-50">
-                    <div className="flex items-center gap-2">
-                       <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">
-                          <Check size={12} className="text-emerald-500" />
-                       </div>
-                       <span>Ready to Print</span>
+                    
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest text-slate-900 shadow-sm">
+                      {art.style}
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <Heart size={14} className="text-rose-500 fill-rose-500" />
-                      <span>{art.likes}</span>
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
+                      <ActionButton icon={Eye} />
+                      <ActionButton icon={Heart} />
+                      <ActionButton 
+                        icon={ShoppingCart} 
+                        onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")} 
+                      />
                     </div>
                   </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+                  <div className="p-8">
+                    <h3 className="text-2xl font-black text-slate-900 group-hover:text-accent-indigo transition-colors tracking-tight mb-4">{art.title}</h3>
+                    <button 
+                      onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")}
+                      className="w-full mb-6 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-orange-500/10 hover:shadow-orange-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                    >
+                      <ShoppingCart size={14} />
+                      Order di Shopee
+                    </button>
+                    
+                    <div className="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-widest pt-6 border-t border-slate-50">
+                      <div className="flex items-center gap-2">
+                         <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">
+                            <Check size={12} className="text-emerald-500" />
+                         </div>
+                         <span>Ready to Print</span>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Heart size={14} className="text-rose-500 fill-rose-500" />
+                        <span>{art.likes}</span>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

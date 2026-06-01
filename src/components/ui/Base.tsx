@@ -16,7 +16,7 @@ export function Button({
   icon: Icon,
   ...props
 }: Omit<HTMLMotionProps<"button">, "children"> & {
-  variant?: "primary" | "secondary" | "glass" | "ghost";
+  variant?: "primary" | "secondary" | "glass" | "ghost" | "outline";
   icon?: LucideIcon;
   children?: React.ReactNode;
 }) {
@@ -25,6 +25,7 @@ export function Button({
     secondary: "bg-accent-cyan hover:bg-accent-cyan/80 text-black neon-shadow-cyan",
     glass: "glass hover:bg-white/10 text-white",
     ghost: "bg-transparent hover:bg-white/5 text-white/70 hover:text-white",
+    outline: "border border-slate-200 hover:bg-slate-50 text-slate-700 hover:text-slate-900",
   };
 
   return (

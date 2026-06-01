@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button, Card } from "./Base";
 import ModelViewer, { ModelStyle } from "../3d/ModelViewer";
 import Scene from "../3d/Scene";
+import { useCart } from "@/context/CartContext";
 
 const styles: ModelStyle[] = [
   "Anime 3D", "Pixar style", "Cyberpunk", "Realistic", 
@@ -14,6 +15,7 @@ const styles: ModelStyle[] = [
 ];
 
 export default function Hero() {
+  const { setActiveTab } = useCart();
   const [prompt, setPrompt] = useState("");
   const [selectedStyle, setSelectedStyle] = useState<ModelStyle>("Cyberpunk");
   const [isGenerating, setIsGenerating] = useState(false);
@@ -29,20 +31,20 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen pt-32 pb-20 px-6 bg-white overflow-hidden">
+    <section className="relative min-h-screen pt-24 pb-16 md:pt-32 md:pb-20 px-4 md:px-6 bg-white overflow-hidden isolate">
       {/* Background is handled by Scene component */}
       <Scene>
         <ModelViewer style={selectedStyle} isGenerating={isGenerating} />
       </Scene>
 
       <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center text-center">
-        <div className="space-y-10 flex flex-col items-center">
+        <div className="space-y-6 sm:space-y-10 flex flex-col items-center w-full">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-indigo/10 border border-accent-indigo/20 text-accent-indigo text-sm font-bold uppercase tracking-widest"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-accent-indigo/10 border border-accent-indigo/20 text-accent-indigo text-xs sm:text-sm font-bold uppercase tracking-widest"
           >
-            <Sparkles size={16} />
+            <Sparkles size={14} className="sm:w-4 sm:h-4" />
             <span>Premium 3D Printing Service</span>
           </motion.div>
 
@@ -50,7 +52,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black text-slate-900 leading-[1.1] tracking-tight"
+            className="text-3xl sm:text-5xl md:text-7xl font-black text-slate-900 leading-[1.1] sm:leading-[1.1] tracking-tight px-2 sm:px-0"
           >
             ✨ 3D Print <span className="text-gradient">Custom</span> — Wujudkan Karakter Favoritmu!
           </motion.h1>
@@ -59,7 +61,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-slate-600 max-w-2xl leading-relaxed mx-auto"
+            className="text-base sm:text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed mx-auto px-4 sm:px-0"
           >
             Tinggal kirim referensi pose/karakter, kami buatkan versi 3D-nya dengan detail rapi & berkualitas.
           </motion.p>
@@ -68,17 +70,21 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex flex-wrap gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full sm:w-auto px-6 sm:px-0"
           >
             <Button 
               onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")}
               variant="primary" 
-              className="px-10 py-5 rounded-2xl text-lg group"
+              className="w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-5 rounded-2xl text-base sm:text-lg group"
             >
               Order di Shopee
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform sm:w-5 sm:h-5" />
             </Button>
-            <Button variant="glass" className="px-10 py-5 rounded-2xl text-lg border-slate-200">
+            <Button 
+              onClick={() => setActiveTab("produk")}
+              variant="outline" 
+              className="w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-5 rounded-2xl text-base sm:text-lg border-slate-200"
+            >
               Lihat Katalog
             </Button>
           </motion.div>
@@ -87,19 +93,19 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="flex items-center gap-10 pt-10 border-t border-slate-100 justify-center w-full"
+            className="flex flex-wrap items-center gap-6 sm:gap-10 pt-8 sm:pt-10 border-t border-slate-100 justify-center w-full"
           >
-            <div>
-              <div className="text-2xl font-black text-slate-900">100%</div>
-              <div className="text-slate-400 text-xs font-bold uppercase tracking-widest">Detail Presisi</div>
+            <div className="text-center sm:text-left">
+              <div className="text-xl sm:text-2xl font-black text-slate-900">100%</div>
+              <div className="text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest">Detail Presisi</div>
             </div>
-            <div>
-              <div className="text-2xl font-black text-slate-900">Custom</div>
-              <div className="text-slate-400 text-xs font-bold uppercase tracking-widest">Bebas Request</div>
+            <div className="text-center sm:text-left">
+              <div className="text-xl sm:text-2xl font-black text-slate-900">Custom</div>
+              <div className="text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest">Bebas Request</div>
             </div>
-            <div>
-              <div className="text-2xl font-black text-slate-900">Fast</div>
-              <div className="text-slate-400 text-xs font-bold uppercase tracking-widest">Proses Cepat</div>
+            <div className="text-center sm:text-left">
+              <div className="text-xl sm:text-2xl font-black text-slate-900">Fast</div>
+              <div className="text-slate-400 text-[10px] sm:text-xs font-bold uppercase tracking-widest">Proses Cepat</div>
             </div>
           </motion.div>
         </div>

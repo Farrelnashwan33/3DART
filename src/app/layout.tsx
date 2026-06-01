@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AIAssistant from "@/components/ui/AIAssistant";
+import { CartProvider } from "@/context/CartContext";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -21,8 +22,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { CartProvider } from "@/context/CartContext";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,10 +31,14 @@ export default function RootLayout({
     <html lang="en" className={`${outfit.variable} scroll-smooth`}>
       <body className="font-sans antialiased bg-slate-50 text-slate-900">
         <CartProvider>
-          <Navbar />
-          {children}
+          <div className="min-h-screen flex bg-slate-50">
+            <Navbar />
+            <div className="flex-1 flex flex-col min-w-0 md:pl-64 pt-16 pb-20 md:pb-0">
+              {children}
+              <Footer />
+            </div>
+          </div>
           <AIAssistant />
-          <Footer />
         </CartProvider>
       </body>
     </html>
