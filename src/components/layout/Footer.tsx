@@ -85,7 +85,7 @@ export default function Footer() {
                   <Box className="text-white" size={32} />
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-white tracking-tight">Toko3DArt <span className="text-accent-indigo">Costum</span></h3>
+                  <h3 className="text-3xl font-bold text-white tracking-tight">Toko3DArt <span className="text-accent-indigo">Custom</span></h3>
                   <p className="text-accent-indigo/60 text-xs font-mono uppercase tracking-widest">3D Printing Studio // HQ</p>
                 </div>
               </Link>
@@ -95,7 +95,10 @@ export default function Footer() {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Button variant="glass" className="border-white/5 hover:border-accent-indigo/30 px-8 py-4 text-lg">
+              <Button 
+                variant="ghost" 
+                className="border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 px-8 py-4 text-lg text-white"
+              >
                 Hubungi Admin
               </Button>
               <Button 
@@ -145,8 +148,8 @@ export default function Footer() {
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.1)" }}
-                    className="w-12 h-12 rounded-xl glass border-white/5 flex items-center justify-center text-white/40 hover:text-white transition-colors"
+                    whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)" }}
+                    className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:text-white transition-colors"
                   >
                     <social.icon size={20} />
                   </motion.a>
@@ -159,7 +162,7 @@ export default function Footer() {
           <div className="lg:col-span-6">
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-accent-indigo/20 to-accent-purple/20 rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000" />
-              <div className="relative glass rounded-[2.5rem] p-10 border-white/10 overflow-hidden bg-white/2">
+              <div className="relative bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-10 border border-white/10 overflow-hidden">
                 <div className="absolute top-0 right-0 p-8">
                   <Mail size={40} className="text-white/5 -rotate-12" />
                 </div>

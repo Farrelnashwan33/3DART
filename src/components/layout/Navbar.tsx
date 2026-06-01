@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Box, Sparkles, LayoutDashboard, Compass, CreditCard, Menu, ShoppingCart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Box, Sparkles, LayoutDashboard, Compass, CreditCard, Menu, ShoppingCart, X } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/Base";
 import { useCart } from "@/context/CartContext";
@@ -11,6 +11,7 @@ import CartModal from "../ui/CartModal";
 export default function Navbar() {
   const { totalItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <>
@@ -21,7 +22,7 @@ export default function Navbar() {
               <Box className="text-white" size={24} />
             </div>
             <span className="text-xl font-bold tracking-tight text-slate-900">
-              Toko3DArt <span className="text-accent-indigo">Costum</span>
+              Toko3DArt <span className="text-accent-indigo">Custom</span>
             </span>
           </Link>
 
@@ -45,7 +46,10 @@ export default function Navbar() {
                 </span>
               )}
             </button>
-            <button className="md:hidden text-slate-600 hover:text-slate-900">
+            <button 
+              onClick={() => setIsMenuOpen(true)}
+              className="md:hidden text-slate-600 hover:text-slate-900 p-2 hover:bg-slate-100 rounded-full transition-colors"
+            >
               <Menu size={24} />
             </button>
             <Button variant="secondary" className="hidden md:flex py-2 px-6">
@@ -54,6 +58,98 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+      
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="fixed inset-0 bg-black z-50 md:hidden"
+            />
+            
+            {/* Drawer Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 h-full w-4/5 max-w-sm bg-white z-[60] shadow-2xl flex flex-col md:hidden border-l border-slate-100"
+            >
+              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
+                <span className="font-bold text-slate-900">Menu Navigasi</span>
+                <button 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-500 hover:text-slate-900"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="flex-1 overflow-y-auto py-8 px-6 space-y-6">
+                <Link 
+                  href="#gallery" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-4 py-3 px-4 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-accent-indigo transition-colors"
+                >
+                  <Compass className="text-accent-cyan" size={22} />
+                  <span className="font-semibold text-lg">Produk</span>
+                </Link>
+                <Link 
+                  href="#pricing" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-4 py-3 px-4 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-accent-indigo transition-colors"
+                >
+                  <CreditCard className="text-accent-indigo" size={22} />
+                  <span className="font-semibold text-lg">Sizing</span>
+                </Link>
+                <Link 
+                  href="#packaging" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-4 py-3 px-4 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-accent-indigo transition-colors"
+                >
+                  <Box className="text-accent-purple" size={22} />
+                  <span className="font-semibold text-lg">Packaging</span>
+                </Link>
+                <Link 
+                  href="#quality" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-4 py-3 px-4 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-accent-indigo transition-colors"
+                >
+                  <Sparkles className="text-emerald-500" size={22} />
+                  <span className="font-semibold text-lg">Kualitas</span>
+                </Link>
+                <Link 
+                  href="#order" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-4 py-3 px-4 rounded-xl hover:bg-slate-50 text-slate-700 hover:text-accent-indigo transition-colors"
+                >
+                  <ShoppingCart className="text-orange-500" size={22} />
+                  <span className="font-semibold text-lg">Cara Order</span>
+                </Link>
+              </div>
+
+              <div className="p-6 border-t border-slate-100">
+                <Button 
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    window.open("https://id.shp.ee/6Zb8HdEg", "_blank");
+                  }}
+                  variant="primary" 
+                  className="w-full justify-center py-4 text-center rounded-xl"
+                >
+                  Hubungi di Shopee
+                </Button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );

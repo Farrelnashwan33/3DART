@@ -32,14 +32,16 @@ export function Button({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={cn(
-        "px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed",
+        "px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
         variants[variant],
         className
       )}
       {...props}
     >
-      {Icon && <Icon size={20} />}
-      {children}
+      <span className="flex items-center justify-center gap-2 w-full">
+        {Icon && <Icon size={20} />}
+        {children}
+      </span>
     </motion.button>
   );
 }

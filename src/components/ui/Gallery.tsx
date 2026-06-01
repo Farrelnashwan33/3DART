@@ -77,15 +77,19 @@ export default function Gallery() {
                     <ActionButton icon={Heart} />
                     <ActionButton 
                       icon={ShoppingCart} 
-                      onClick={() => addToCart({ id: art.id, title: art.title, price: art.price, image: art.image })} 
+                      onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")} 
                     />
                   </div>
                 </div>
                 <div className="p-8">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-black text-slate-900 group-hover:text-accent-indigo transition-colors tracking-tight">{art.title}</h3>
-                    <div className="text-xl font-black text-accent-indigo tracking-tighter">${art.price}</div>
-                  </div>
+                  <h3 className="text-2xl font-black text-slate-900 group-hover:text-accent-indigo transition-colors tracking-tight mb-4">{art.title}</h3>
+                  <button 
+                    onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")}
+                    className="w-full mb-6 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-orange-500/10 hover:shadow-orange-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                  >
+                    <ShoppingCart size={14} />
+                    Order di Shopee
+                  </button>
                   
                   <div className="flex justify-between items-center text-slate-400 text-xs font-bold uppercase tracking-widest pt-6 border-t border-slate-50">
                     <div className="flex items-center gap-2">

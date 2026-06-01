@@ -68,9 +68,9 @@ export default function OrderGuide() {
 
         <div className="relative">
           {/* Connection Line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-emerald-500 to-accent-indigo opacity-20 -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-10 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 via-emerald-500 to-accent-indigo opacity-20" />
           
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
             {steps.map((step, index) => (
               <motion.div
                 key={step.title}

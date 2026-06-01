@@ -70,7 +70,7 @@ export default function Pricing() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-[90rem] mx-auto relative z-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-[90rem] mx-auto relative z-10">
         {plans.map((plan, index) => {
           const colorClass = 
             plan.color === "accent-cyan" ? "text-accent-cyan border-accent-cyan/20 bg-accent-cyan/5" :
@@ -89,7 +89,7 @@ export default function Pricing() {
               transition={{ delay: index * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               <Card 
-                className={`h-full border-[1.5px] p-6 relative flex flex-col transition-all duration-700 hover:translate-y-[-10px] group bg-white ${borderColor}`}
+                className={`h-full border-[1.5px] p-6 relative flex flex-col transition-all duration-700 hover:translate-y-[-10px] group bg-white overflow-visible ${borderColor}`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-accent-indigo to-accent-purple text-white px-5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl shadow-accent-indigo/30">
