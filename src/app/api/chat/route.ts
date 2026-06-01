@@ -6,6 +6,10 @@ function getFallbackResponse(query: string): string {
   if (q.includes("halo") || q.includes("hai") || q.includes("tanya") || q.includes("nanya") || q.includes("pagi") || q.includes("siang") || q.includes("sore") || q.includes("malam") || q.includes("bantu")) {
     return "Halo! Selamat datang di Vision Support. Ada yang bisa saya bantu mengenai layanan cetak 3D, pilihan ukuran, estimasi pengerjaan, atau cara pemesanan?";
   }
+
+  if (q.includes("terima kasih") || q.includes("terimakasih") || q.includes("makasih") || q.includes("thanks") || q.includes("thank you")) {
+    return "Sama-sama! Senang bisa membantu Anda. Jika ada hal lain yang ingin Anda tanyakan seputar cetak 3D atau pemesanan, silakan hubungi kami kapan saja. 😊";
+  }
   
   if (q.includes("lama") || q.includes("hari") || q.includes("pengerjaan") || q.includes("proses") || q.includes("durasi") || q.includes("kapan") || q.includes("cepat")) {
     return "Proses pengerjaan cetak 3D di Toko3DArt rata-rata memakan waktu 3–7 hari kerja, tergantung pada ukuran model dan tingkat kerumitan detail desain yang Anda pilih.";
@@ -31,7 +35,7 @@ function getFallbackResponse(query: string): string {
     return "Kami menjamin kualitas cetak 3D dengan detail yang sangat tajam, presisi tinggi, dan menggunakan material resin pilihan yang kokoh serta berfinishing halus.";
   }
 
-  return "Terima kasih atas pertanyaan Anda! Silakan lengkapi environment variable `GEMINI_API_KEY` di `.env.local` untuk asisten AI interaktif penuh.\n\nBerikut ringkasan informasi layanan kami:\n- Waktu pengerjaan: 3–7 hari kerja.\n- Model Custom: Menerima file desain 3D Anda.\n- Pemesanan: Melalui WhatsApp dan Shopee.";
+  return "Terima kasih atas pesan Anda! Saya siap membantu menjawab pertanyaan Anda mengenai layanan cetak 3D di Toko3DArt. Pengerjaan kami rata-rata memakan waktu 3-7 hari kerja, menerima file desain custom, dan pemesanan bisa dilakukan langsung via WhatsApp atau Shopee. Ada yang ingin Anda tanyakan lebih lanjut?";
 }
 
 export async function POST(req: Request) {
