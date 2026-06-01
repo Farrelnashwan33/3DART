@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Heart, ShoppingCart, Eye, Check } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Heart, ShoppingCart, Eye, Check, X } from "lucide-react";
+import { useState } from "react";
 import { Card } from "./Base";
 import { useCart } from "@/context/CartContext";
 
@@ -15,9 +16,27 @@ export const artworks = [
   { id: 7, title: "Techno Relic", style: "Artifact", author: "@farrel_n", likes: "1.2k", price: 300, image: "/foto/art7.png" },
 ];
 
-
 export default function Gallery() {
   const { addToCart, searchQuery } = useCart();
+  const [likedIds, setLikedIds] = useState<number[]>([]);
+  const [selectedArtwork, setSelectedArtwork] = useState<typeof artworks[0] | null>(null);
+
+  const toggleLike = (id: number) => {
+    setLikedIds((prev) => 
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const parseLikes = (likesStr: string): number => {
+    if (likesStr.endsWith("k")) {
+      return parseFloat(likesStr.replace("k", "")) * 1000;
+    }
+    return parseInt(likesStr, 10);
+  };
+
+  const formatLikes = (num: number): string => {
+    return num.toLocaleString("id-ID");
+  };
 
   const filteredArtworks = artworks.filter((art) => 
     art.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -85,8 +104,15 @@ export default function Gallery() {
 
                     {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
-                      <ActionButton icon={Eye} />
-                      <ActionButton icon={Heart} />
+                      <ActionButton 
+                        icon={Eye} 
+                        onClick={() => setSelectedArtwork(art)}
+                      />
+                      <ActionButton 
+                        icon={Heart} 
+                        onClick={() => toggleLike(art.id)}
+                        isLiked={likedIds.includes(art.id)}
+                      />
                       <ActionButton 
                         icon={ShoppingCart} 
                         onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")} 
@@ -110,10 +136,16 @@ export default function Gallery() {
                          </div>
                          <span>Ready to Print</span>
                       </div>
-                      <div className="flex items-center gap-1.5">
-                        <Heart size={14} className="text-rose-500 fill-rose-500" />
-                        <span>{art.likes}</span>
-                      </div>
+                      <button 
+                        onClick={() => toggleLike(art.id)}
+                        className="flex items-center gap-1.5 hover:scale-105 transition-all text-slate-400 hover:text-rose-500 cursor-pointer"
+                      >
+                        <Heart 
+                          size={14} 
+                          className={`transition-colors ${likedIds.includes(art.id) ? "text-rose-500 fill-rose-500" : "text-rose-500"}`} 
+                        />
+                        <span>{formatLikes(likedIds.includes(art.id) ? parseLikes(art.likes) + 1 : parseLikes(art.likes))}</span>
+                      </button>
                     </div>
                   </div>
                 </Card>
@@ -122,19 +154,126 @@ export default function Gallery() {
           </div>
         )}
       </div>
+
+      {/* Product Detail Modal */}
+      <AnimatePresence>
+        {selectedArtwork && (
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl flex flex-col border border-slate-100 max-h-[90vh]"
+            >
+              {/* Header */}
+              <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <div>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-accent-indigo bg-accent-indigo/10 px-2.5 py-1 rounded-full">
+                    {selectedArtwork.style}
+                  </span>
+                  <h3 className="text-xl font-black text-slate-900 mt-2">{selectedArtwork.title}</h3>
+                </div>
+                <button 
+                  onClick={() => setSelectedArtwork(null)}
+                  className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors cursor-pointer"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="p-6 overflow-y-auto space-y-6 flex-1 custom-scrollbar">
+                <div className="aspect-[4/3] bg-slate-50 rounded-2xl flex items-center justify-center p-6 border border-slate-100/50 relative">
+                  <img 
+                    src={selectedArtwork.image} 
+                    alt={selectedArtwork.title} 
+                    className="max-h-full max-w-full object-contain"
+                  />
+                  <button
+                    onClick={() => toggleLike(selectedArtwork.id)}
+                    className="absolute top-4 right-4 p-3 bg-white/90 backdrop-blur-md text-slate-600 hover:text-rose-500 rounded-full shadow-md transition-all cursor-pointer flex items-center justify-center"
+                  >
+                    <Heart 
+                      size={20} 
+                      className={likedIds.includes(selectedArtwork.id) ? "text-rose-500 fill-rose-500" : "text-rose-500"} 
+                    />
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center text-sm border-b border-slate-50 pb-4">
+                    <span className="text-slate-400 font-medium">Author / Designer</span>
+                    <span className="text-slate-800 font-bold">{selectedArtwork.author}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm border-b border-slate-50 pb-4">
+                    <span className="text-slate-400 font-medium">Likes</span>
+                    <span className="text-slate-800 font-bold flex items-center gap-1">
+                      <Heart size={14} className="text-rose-500 fill-rose-500" />
+                      {formatLikes(likedIds.includes(selectedArtwork.id) ? parseLikes(selectedArtwork.likes) + 1 : parseLikes(selectedArtwork.likes))}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm border-b border-slate-50 pb-4">
+                    <span className="text-slate-400 font-medium">Status</span>
+                    <span className="text-emerald-500 font-bold flex items-center gap-1.5">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      Ready to Print (3D Resin)
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h4 className="font-bold text-slate-800 text-sm">Deskripsi Produk:</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed font-light">
+                      Figur cetak 3D premium dengan detail tinggi. Diproduksi menggunakan printer 3D tipe SLA/Resin resolusi tinggi untuk menjamin detail karakter sangat presisi, kokoh, dan siap dipajang atau dicat (ready-to-paint). Cocok untuk koleksi pribadi atau hadiah spesial.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-slate-100 flex gap-3 bg-slate-50/50">
+                <button
+                  onClick={() => {
+                    addToCart({
+                      id: selectedArtwork.id,
+                      title: selectedArtwork.title,
+                      price: selectedArtwork.price,
+                      image: selectedArtwork.image
+                    });
+                    setSelectedArtwork(null);
+                  }}
+                  className="flex-1 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-800 hover:bg-slate-50 font-bold text-xs uppercase tracking-widest transition-all cursor-pointer"
+                >
+                  Tambah ke Keranjang
+                </button>
+                <button
+                  onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")}
+                  className="flex-1 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-orange-500/20 transition-all cursor-pointer"
+                >
+                  <ShoppingCart size={14} />
+                  Order di Shopee
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
 
-function ActionButton({ icon: Icon, onClick }: { icon: any, onClick?: () => void }) {
+function ActionButton({ icon: Icon, onClick, isLiked }: { icon: any, onClick?: () => void, isLiked?: boolean }) {
   return (
     <motion.button 
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       onClick={onClick}
-      className="w-14 h-14 rounded-2xl bg-white text-slate-900 hover:bg-accent-indigo hover:text-white transition-all flex items-center justify-center shadow-2xl"
+      className={`w-14 h-14 rounded-2xl transition-all flex items-center justify-center shadow-2xl cursor-pointer ${
+        isLiked 
+          ? "bg-rose-500 text-white hover:bg-rose-600" 
+          : "bg-white text-slate-900 hover:bg-accent-indigo hover:text-white"
+      }`}
     >
-      <Icon size={24} />
+      <Icon size={24} className={isLiked ? "fill-white" : ""} />
     </motion.button>
   );
 }
