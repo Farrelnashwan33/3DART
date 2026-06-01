@@ -98,7 +98,11 @@ export default function Footer() {
               <Button variant="glass" className="border-white/5 hover:border-accent-indigo/30 px-8 py-4 text-lg">
                 Hubungi Admin
               </Button>
-              <Button variant="primary" className="px-8 py-4 text-lg group">
+              <Button 
+                onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")}
+                variant="primary" 
+                className="px-8 py-4 text-lg group"
+              >
                 Order di Shopee
                 <Zap size={20} className="fill-white group-hover:animate-bounce" />
               </Button>

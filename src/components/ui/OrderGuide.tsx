@@ -104,7 +104,10 @@ export default function OrderGuide() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-orange-500/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 mx-auto">
+          <button 
+            onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-orange-500/20 transition-all hover:scale-105 active:scale-95 flex items-center gap-3 mx-auto"
+          >
             <ShoppingCart size={20} />
             Buka Toko di Shopee
           </button>

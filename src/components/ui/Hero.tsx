@@ -70,7 +70,11 @@ export default function Hero() {
             transition={{ delay: 0.3 }}
             className="flex flex-wrap gap-4 justify-center"
           >
-            <Button variant="primary" className="px-10 py-5 rounded-2xl text-lg group">
+            <Button 
+              onClick={() => window.open("https://id.shp.ee/6Zb8HdEg", "_blank")}
+              variant="primary" 
+              className="px-10 py-5 rounded-2xl text-lg group"
+            >
               Order di Shopee
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Button>
